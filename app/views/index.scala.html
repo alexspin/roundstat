@@ -1,0 +1,33 @@
+@(ideas: List[Idea], ideaForm: Form[String])
+
+@import helper._
+
+@main("Todo list") {
+    
+    <h1>@ideas.size idea(s)</h1>
+    
+    <ul>
+        @ideas.map { idea =>
+            <li>
+                @idea.idea
+                
+                @form(routes.Application.deleteIdea(idea.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    <h2>Add a new idea</h2>
+    
+    @form(routes.Application.newIdea) {
+        
+        @inputText(ideaForm("idea")) 
+        
+        <input type="submit" value="Create">
+        
+    }
+       
+}
+
+
