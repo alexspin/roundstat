@@ -1,0 +1,18 @@
+@(filledForm: Form[User], home: String)
+
+@import helper._
+
+
+@form(routes.Application.updateUser) {
+    
+    @helper.inputText(filledForm("name"))
+    
+    @helper.inputText(filledForm("age"))
+    
+    <input type="submit" value="UpdateUser">
+    
+      
+}
+
+<br><br>
+Home: @home
