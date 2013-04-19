@@ -3,12 +3,11 @@ package controllers
 import play.api._
 import play.api.mvc._
 import models._
- 
 import play.api.data._
 import play.api.data.Forms._
 
 object Application extends Controller {
-
+  
   def index = Action {
 	  Ok("Hello World") 
     }
@@ -17,15 +16,15 @@ object Application extends Controller {
   import play.api.data.Forms._
   
   def ideas = Action {
-	  Ok(views.html.index(Idea.all(), ideaForm))
+	  Ok(views.html.index(Ideas.all(), ideaForm))
   }  
 
   //define actions
   def newIdea = Action { implicit request =>
   	ideaForm.bindFromRequest.fold(
-  			errors => BadRequest(views.html.index(Idea.all(), errors)),
-  			label => {
-  				Idea.create(label)
+  			errors => BadRequest(views.html.index(Ideas.all(), errors)),
+  			idea => {
+  				Ideas.create(idea)
   				Redirect(routes.Application.ideas)
   			}
   		)
@@ -33,13 +32,13 @@ object Application extends Controller {
  
  
   def deleteIdea(id: Long) = Action {
-	  Idea.delete(id)
+	  Ideas.delete(id)
 	  Redirect(routes.Application.ideas)
   }
   
   
   val ideaForm = Form(
-		  	"label" -> nonEmptyText
+		  	"idea" -> nonEmptyText
 		  )
 		  
 		  
