@@ -7,6 +7,7 @@ object Idea {
 import anorm._
 import anorm.SqlParser._
 
+// create idea 
 	val idea = {
 		get[Long]("id") ~ 
 		get[String]("idea") map {
