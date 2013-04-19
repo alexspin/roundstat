@@ -24,8 +24,8 @@ object Application extends Controller {
   def newIdea = Action { implicit request =>
   	ideaForm.bindFromRequest.fold(
   			errors => BadRequest(views.html.index(Idea.all(), errors)),
-  			label => {
-  				Idea.create(label)
+  			idea => {
+  				Idea.create(idea)
   				Redirect(routes.Application.ideas)
   			}
   		)
